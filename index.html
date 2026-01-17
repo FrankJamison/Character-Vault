@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>2020 Character Vault</title>
+
+    <!-- This repo has TWO entry points:
+         - If you run the Node server (recommended), it serves /public at http://localhost:4000/
+         - If you open the repo root as static files, the frontend lives under /public
+    -->
+    <link rel="stylesheet" href="public/css/reset.css" />
+    <link rel="stylesheet" href="public/css/main.css" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+</head>
+
+<body>
+    <div class="container" style="padding-top: 32px;">
+        <h2>2020 Character Vault</h2>
+        <p class="text-muted">
+            If you’re not seeing CSS, you may be opening the wrong entry page.
+        </p>
+
+        <div class="list-group" style="max-width: 720px;">
+            <a class="list-group-item list-group-item-action" href="http://localhost:4000/">
+                Open the app (Node server): http://localhost:4000/
+            </a>
+            <a class="list-group-item list-group-item-action" href="public/index.html">
+                Open the static frontend: public/index.html
+            </a>
+        </div>
+
+        <p style="margin-top: 16px;">
+            Recommended: run the server from <code>server/</code> using <code>npm start</code>.
+        </p>
+    </div>
+</body>
+
+</html>

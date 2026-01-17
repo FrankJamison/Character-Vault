@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="../css/reset.css" />
+    <link rel="stylesheet" href="../css/main.css" />
+    <title>Your Characters</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="../index.html">Character Vault</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="../index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../about.html">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../settings/settings.html">Settings</a>
+                </li>
+            </ul>
+            <div class="navbar-actions ml-auto">
+                <a class="navbar-action" id="logout" href="" onclick="doLogout(event)">Logout</a>
+                <div class="navbar-user" id="header-username"></div>
+                <button class="navbar-action" id="theme-toggle" type="button">Light Mode</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="character-form">
+            <form>
+                <div class="form-row">
+                    <div class="col-md-6">
+                        <label class="sr-only" for="formInputCharacterName">Character Name</label>
+                        <input id="formInputCharacterName" class="form-control" type="text" name="character-name" placeholder="Character Name" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="sr-only" for="formInputCharacterRace">Character Race</label>
+                        <input id="formInputCharacterRace" class="form-control" type="text" name="character-race" placeholder="Character Race" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="sr-only" for="formInputCharacterClass">Character Class</label>
+                        <input id="formInputCharacterClass" class="form-control" type="text" name="character-class" placeholder="Character Class" />
+                    </div>
+                    <div class="col-md-2">
+                        <label class="sr-only" for="formInputCharacterLevel">Character Level</label>
+                        <input id="formInputCharacterLevel" class="form-control" type="text" name="character-level" placeholder="Character Level" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="sr-only" for="formInputCharacterBuild">Character Build</label>
+                        <input id="formInputCharacterBuild" class="form-control" type="text" name="character-build" placeholder="Character Build" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="sr-only" for="formInputCharacterSheet">Character Sheet</label>
+                        <input id="formInputCharacterSheet" class="form-control" type="text" name="character-sheet" placeholder="Character Sheet" />
+                    </div>
+                    <div class="col-md-4">
+                        <label class="sr-only" for="formInputCharacterImage">Character Image</label>
+                        <input id="formInputCharacterImage" class="form-control" type="text" name="character-image" placeholder="Character Image" />
+                    </div>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-primary" onclick="doAddCharacter(event)">
+                            ADD
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="characters" class="empty-state loading">Loading characters…</div>
+    </div>
+
+    <footer>
+        <div class="author">
+            <p>Author: <a href="https://fcjamison.com">Frank Jamison</a></p>
+        </div>
+    </footer>
+    <script src="../lib/api.config.js"></script>
+    <script src="../lib/simple-storage.js"></script>
+    <script src="../lib/service-helpers.js"></script>
+    <script src="../lib/auth.service.js"></script>
+    <script src="../lib/user-api.service.js"></script>
+    <script src="../lib/auth.js"></script>
+    <script src="../lib/auth.guard.js"></script>
+    <script src="./characters-api.service.js"></script>
+    <script src="./characters.service.js"></script>
+    <script src="./characters.js"></script>
+    <script src="../app.js"></script>
+    <script src="../lib/theme.js"></script>
+</body>
+
+</html>

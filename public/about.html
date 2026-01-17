@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>About</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="./index.html">Character Vault</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+            </ul>
+            <div class="navbar-actions ml-auto">
+                <a class="navbar-action" id="login" href="./login.html">Sign In</a>
+                <a class="navbar-action" id="logout" href="" onclick="doLogout(event)">Logout</a>
+                <button class="navbar-action" id="theme-toggle" type="button">Light Mode</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>About</h1>
+            <p>A small full-stack demo app for auth + CRUD using vanilla JS and Express.</p>
+        </div>
+
+        <div class="tile-grid">
+            <div class="panel">
+                <h2>What you can do</h2>
+                <ul>
+                    <li>Register, sign in, and sign out</li>
+                    <li>Create and delete characters</li>
+                    <li>Create and delete tasks</li>
+                    <li>Update account settings</li>
+                </ul>
+            </div>
+
+            <div class="panel">
+                <h2>Tech stack</h2>
+                <ul>
+                    <li>Frontend: HTML + CSS + vanilla JS (Bootstrap 4)</li>
+                    <li>Backend: Node.js + Express</li>
+                    <li>Auth: JWT stored in localStorage</li>
+                    <li>Persistence: JSON file database</li>
+                </ul>
+            </div>
+
+            <a class="tile tile--amber" href="./login.html">
+                <div class="tile-title">
+                    <span>Get Started</span>
+                    <span class="kbd">/login</span>
+                </div>
+                <p class="tile-desc">Sign in (or register) to access your characters and tasks.</p>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="author">
+            <p>Author: <a href="https://fcjamison.com">Frank Jamison</a></p>
+        </div>
+    </footer>
+    <script src="./lib/api.config.js"></script>
+    <script src="./lib/simple-storage.js"></script>
+    <script src="./lib/service-helpers.js"></script>
+    <script src="./lib/auth.service.js"></script>
+    <script src="./lib/user-api.service.js"></script>
+    <script src="./lib/auth.js"></script>
+    <script src="./lib/theme.js"></script>
+</body>
+
+</html>

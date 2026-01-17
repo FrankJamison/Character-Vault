@@ -1,0 +1,26 @@
+# Dependencies
+node_modules/
+
+# Local env
+.env
+.env.*
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/*.log
+
+# Certificates (keep local-only by default)
+server/*.key
+server/*.cert
+server/*.pem
+
+# Runtime data (optional)
+# If you want to version local data for demo purposes, remove this line.
+server/data/db.json

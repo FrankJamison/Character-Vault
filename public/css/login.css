@@ -1,0 +1,35 @@
+.card-split {
+    display: flex;
+    gap: 32px;
+    align-items: stretch;
+    width: min(920px, 100%);
+    padding: 8px;
+}
+
+.right-border {
+    border-right: 1px solid var(--border);
+    padding-right: 24px;
+}
+
+.left-border {
+    padding-left: 24px;
+}
+
+@media (max-width: 768px) {
+    .card-split {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .right-border {
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-right: 0;
+        padding-bottom: 16px;
+    }
+
+    .left-border {
+        padding-left: 0;
+        padding-top: 8px;
+    }
+}

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous" />
+    <link rel="stylesheet" href="./css/reset.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>Welcome! | Frank's Character App</title>
+</head>
+
+<body>
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand" href="./index.html">Character Vault</a>
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="./index.html">Home</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="./about.html">About</a>
+                </li>
+            </ul>
+            <div class="navbar-actions ml-auto">
+                <a class="navbar-action" id="login" href="./login.html">Sign In</a>
+                <button class="navbar-action" id="theme-toggle" type="button">Light Mode</button>
+            </div>
+        </nav>
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Welcome to Character Vault</h1>
+            <p>Manage your characters, tasks, and account settings in one place.</p>
+        </div>
+
+        <div class="tile-grid">
+            <a class="tile tile--violet" href="./characters/characters.html">
+                <div class="tile-title">
+                    <span>Characters</span>
+                    <span class="kbd">/characters</span>
+                </div>
+                <p class="tile-desc">Create, view, and delete your RPG characters.</p>
+            </a>
+
+            <a class="tile tile--emerald" href="./todo/todo.html">
+                <div class="tile-title">
+                    <span>Tasks</span>
+                    <span class="kbd">/todo</span>
+                </div>
+                <p class="tile-desc">Track tasks with simple pending/completed status.</p>
+            </a>
+
+            <a class="tile tile--blue" href="./settings/settings.html">
+                <div class="tile-title">
+                    <span>Settings</span>
+                    <span class="kbd">/settings</span>
+                </div>
+                <p class="tile-desc">Update username, email, and password.</p>
+            </a>
+
+            <a class="tile tile--amber" href="./login.html">
+                <div class="tile-title">
+                    <span>Sign In</span>
+                    <span class="kbd">/login</span>
+                </div>
+                <p class="tile-desc">Log in or register to start using the app.</p>
+            </a>
+
+            <a class="tile tile--rose" href="./about.html">
+                <div class="tile-title">
+                    <span>About</span>
+                    <span class="kbd">/about</span>
+                </div>
+                <p class="tile-desc">Quick overview of what this project demonstrates.</p>
+            </a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="author">
+            <p>Author: <a href="https://fcjamison.com">Frank Jamison</a></p>
+        </div>
+    </footer>
+
+    <script src="./lib/theme.js"></script>
+</body>
+
+</html>
