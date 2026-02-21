@@ -1,0 +1,66 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "Install (server)",
+            "type": "shell",
+            "command": "npm",
+            "args": [
+                "install"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Start Server",
+            "type": "shell",
+            "command": "cmd",
+            "args": [
+                "/c",
+                "start",
+                "\"\"",
+                "/b",
+                "npm",
+                "start"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}/server"
+            },
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Open in Browser",
+            "type": "shell",
+            "command": "start",
+            "args": [
+                "chrome",
+                "http://charactervault.localhost:4000/"
+            ],
+            "presentation": {
+                "reveal": "never",
+                "panel": "shared"
+            },
+            "problemMatcher": []
+        },
+        {
+            "label": "Run App (server + open site)",
+            "dependsOrder": "sequence",
+            "dependsOn": [
+                "Install (server)",
+                "Start Server",
+                "Open in Browser"
+            ],
+            "problemMatcher": []
+        }
+    ]
+}

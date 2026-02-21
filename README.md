@@ -1,57 +1,82 @@
-# 2020 Character Vault (Characters + Tasks)
+# The Character Vault
 
-A small, full-stack JavaScript app that demonstrates **authentication + CRUD** in a clean, beginner-friendly way.
+Full-stack JavaScript demo app (vanilla JS + Node/Express) showcasing **JWT auth** and **CRUD** for:
 
-Built as an in-class app for my **MSSE 661 Web Software Development** course at **Regis University**.
+- RPG-style **Characters**
+- **Tasks** (to-do list)
+- Basic **Account settings**
 
-After a user registers and logs in, they can:
-- Create and delete **RPG-style characters**
-- Create and delete **to-do tasks**
-- Update basic **account settings** (username/email/password)
+This codebase is intentionally simple and readable: it’s designed for local dev, classroom use, and lightweight portfolio hosting.
 
-This project is designed as a portfolio item: it’s intentionally simple, readable, and easy to run locally.
-
----
-
-## 2026 Updates
-
-This project received a 2026 refresh focused on UX polish and smoother deployment.
-
-- **UI refresh + dark theme:** updated global styling and page layouts, with a theme-friendly design (Bootstrap + custom CSS).
-- **More robust Tasks UI:** fixed initialization issues, “Add” button handling, and duplicate task rendering.
-- **Production-friendly server:** HTTPS listener is optional (most hosts terminate TLS at a reverse proxy).
-- **Dev workflow improvements:** VS Code tasks to open the app and run the server more easily.
-- **Reverse-proxy hosting notes:** guidance for running Node behind Apache (e.g., Webuzo) with a subdomain.
-
-## Features
-
-- **Auth**
-  - Register + login
-  - JWT-based authentication stored in browser `localStorage`
-  - Route guarding (redirects unauthenticated users to login)
-
-- **Characters CRUD**
-  - Add characters with: name, race, class, level, build, sheet, image
-  - List characters per user
-  - Delete characters
-
-- **Tasks CRUD**
-  - Add tasks with: name + status (pending/completed)
-  - List tasks per user
-  - Delete tasks
-
-- **Settings**
-  - Update username/email/password
+**Live Preview:** https://charactervault.fcjamison.com/
 
 ---
 
-## Tech Stack
+## Quickstart (Local)
 
-- **Frontend:** HTML + CSS + vanilla JS (Bootstrap 4 styling)
-- **Backend:** Node.js + Express
-- **Auth:** JWT (`jsonwebtoken`)
-- **Password hashing:** `bcryptjs`
-- **Persistence:** simple JSON file database (`server/data/db.json`) for easy local use
+### Prerequisites
+
+- Node.js (LTS)
+
+### Install
+
+```bash
+cd server
+npm install
+```
+
+### Run
+
+```bash
+cd server
+npm start
+```
+
+Open the app:
+
+- http://localhost:4000/
+
+---
+
+## VS Code Tasks
+
+This repo includes a few tasks in `.vscode/tasks.json`:
+
+- **Install (server)** — runs `npm install` in `server/`
+- **Start Server** — starts the Node server from `server/`
+- **Open in Browser** — opens the app URL in Chrome
+- **Run App (server + open site)** — runs install → start → open
+
+The **Open in Browser** task opens:
+
+- http://charactervault.localhost:4000/
+
+If that hostname doesn’t resolve on your machine, either:
+
+- use `http://localhost:4000/`, or
+- add a hosts entry mapping it to loopback (Windows: `C:\Windows\System32\drivers\etc\hosts`):
+  - `127.0.0.1 charactervault.localhost`
+
+---
+
+## How It Works
+
+### App shape
+
+This is a single Node/Express server that:
+
+- serves the frontend static files from `public/`
+- exposes JSON APIs under `/api/...`
+
+The frontend calls the API using same-origin URLs:
+
+- `BASE_API_URL = ${window.location.origin}/api`
+
+### Auth
+
+- JWT tokens are issued by the server
+- The frontend stores the access token in `localStorage`
+- Frontend routes/pages use a guard to redirect unauthenticated users to login
 
 ---
 
@@ -74,66 +99,22 @@ server/                 # Node server (static + API)
 
 ---
 
-## Getting Started (Local)
+## API Reference (High-Level)
 
-### Prerequisites
-
-- **Node.js (LTS)** installed (Windows/macOS/Linux)
-
-### Install
-
-From the `server/` folder:
-
-```bash
-cd server
-npm install
-```
-
-### Run
-
-```bash
-cd server
-npm start
-```
-
-Then open:
-
-- http://localhost:4000/
-
-### VS Code Tasks (optional)
-
-If you open this repo in VS Code, the workspace includes tasks to speed up common actions:
-
-- **Install (server)**: runs `npm install` in `server/`
-- **Start Server**: runs `npm start` in `server/`
-- **Open in Browser**: opens the app URL in Chrome
-
-If your local setup uses the custom hostname `http://2020CharacterVault.localhost:4000/`, the task opens that URL instead of `localhost`.
-
-Note: the Node server serves the frontend from the `public/` folder. If you open the repo-root `index.html` directly, you’ll see a small landing page that links you to the correct entry point.
-
-This single server:
-- Hosts the frontend at `http://localhost:4000/`
-- Exposes the API at `http://localhost:4000/api/...`
-
----
-
-## API Overview
-
-The frontend calls the API using a same-origin base URL:
-
-- `BASE_API_URL = ${window.location.origin}/api`
-
-Key routes:
+Auth / user:
 
 - `POST /api/auth/register`
 - `POST /api/auth/login`
 - `GET /api/user/me`
 - `PUT /api/user/me/update`
 
+Tasks:
+
 - `GET /api/tasks`
 - `POST /api/tasks`
 - `DELETE /api/tasks/:taskId`
+
+Characters:
 
 - `GET /api/characters`
 - `POST /api/characters`
@@ -143,24 +124,38 @@ Key routes:
 
 ## Data Storage
 
-For local simplicity, the backend stores data in:
+For local simplicity, persistence is a JSON file:
 
 - `server/data/db.json`
 
-This includes users, tasks, characters, and ID counters. If you want a clean slate, you can stop the server and reset `db.json` back to an empty structure.
+It contains users, tasks, characters, and ID counters.
+
+To reset locally: stop the server and replace `server/data/db.json` with a clean/empty structure. (The API expects this file to exist.)
+
+Minimal empty DB template:
+
+```json
+{
+  "nextIds": { "user": 1, "task": 1, "character": 1 },
+  "users": [],
+  "tasks": [],
+  "characters": []
+}
+```
 
 ---
 
 ## Configuration
 
-Optional environment variables:
+Environment variables (all optional unless you’re deploying):
 
-- `PORT` (default `4000`) — HTTP server port
-- `HTTPS_PORT` (default `4443`) — HTTPS server port
-- `JWT_SECRET` (default `dev-secret-change-me`) — JWT signing secret
-- `ACCESS_TOKEN_EXPIRES_IN_SECONDS` (default `3600`) — token lifetime
+- `PORT` (default: `4000`) — HTTP port
+- `HTTPS_PORT` (default: `4443`) — HTTPS port (only used when HTTPS is enabled)
+- `JWT_SECRET` (default: `dev-secret-change-me`) — JWT signing secret (set this in production)
+- `ACCESS_TOKEN_EXPIRES_IN_SECONDS` (default: `3600`) — token lifetime
+- `ENABLE_HTTPS` (default: unset/false) — enable the HTTPS listener
 
-Example (PowerShell):
+PowerShell example:
 
 ```powershell
 $env:PORT=4000
@@ -171,103 +166,59 @@ npm start
 
 ---
 
-## Deploying to Production
+## Deployment Notes
 
-This app is a single Node/Express server that serves the frontend (`public/`) and API (`/api`).
-
-### 1) Decide where to host
-
-The easiest “first production” options are platforms like **Render**, **Railway**, or **Fly.io**.
-
-Important note: the backend stores data in a local JSON file (`server/data/db.json`). Many hosts use **ephemeral filesystems**, so data will reset on redeploy unless you configure a **persistent disk/volume** or migrate to a real database.
-
-### 2) Set environment variables (required)
-
-- `JWT_SECRET` — set to a strong random string (do not use the default)
-- `PORT` — most platforms set this automatically
-
-Recommended:
-
-- `NODE_ENV=production`
-- `ACCESS_TOKEN_EXPIRES_IN_SECONDS=3600` (or your preferred value)
-
-### 3) Use the correct start command
+### Recommended deployment model
 
 Deploy the `server/` folder as the Node app.
 
 - Install: `npm install` (or `npm ci`)
 - Start: `npm start`
 
-The server automatically serves the frontend from `../public`.
+The server serves the frontend from `../public`.
 
-### 4) HTTPS / TLS
+### HTTPS / TLS
 
-Most production hosts terminate HTTPS for you.
+Most hosts terminate TLS for you (reverse proxy / load balancer). In that case, keep Node running HTTP-only.
 
-- Leave `ENABLE_HTTPS` unset/false in production (default)
-- If you *really* want the app to bind its own HTTPS port, set:
-  - `ENABLE_HTTPS=true`
-  - `HTTPS_PORT=4443` (or similar)
-  - and provide valid `server/server.key` + `server/server.cert`
+If you intentionally want Node to bind HTTPS itself:
 
-### 5) Hosting behind Apache (reverse proxy)
+- set `ENABLE_HTTPS=true`
+- set `HTTPS_PORT`
+- provide `server/server.key` and `server/server.cert`
 
-If you’re hosting on a traditional server where **Apache fronts traffic** (including Webuzo/cPanel-like setups), point the domain/subdomain to Apache and configure a reverse proxy to the Node app (example assumes Node listens on `127.0.0.1:4000`):
+### Apache reverse proxy (example)
 
-- Enable proxy modules (`proxy`, `proxy_http`, and usually `headers`)
-- Configure:
-  - `ProxyPreserveHost On`
-  - `ProxyPass / http://127.0.0.1:4000/`
-  - `ProxyPassReverse / http://127.0.0.1:4000/`
+If Apache fronts the site and Node listens on `127.0.0.1:4000`:
 
-TLS certificates typically live on Apache in this setup; Node can remain HTTP-only behind the proxy.
-
-Note: on some control-panel managed servers (e.g., Webuzo), Apache may be managed outside systemd; automated installers like `certbot --apache` may not work. In that case, issue the cert with `certbot certonly` (standalone/webroot) and install the resulting PEM files into the panel’s expected certificate paths.
-
-### Example: Render (simple approach)
-
-Create a new **Web Service** and point it at this repo.
-
-- **Root Directory:** `server`
-- **Build Command:** `npm install`
-- **Start Command:** `npm start`
-- **Environment:**
-  - `JWT_SECRET` = (generate a strong secret)
-  - `NODE_ENV` = `production`
-
-If you want persistence for `server/data/db.json`, add a **Persistent Disk** and mount it so that `server/data/` is stored on the disk.
+- `ProxyPreserveHost On`
+- `ProxyPass / http://127.0.0.1:4000/`
+- `ProxyPassReverse / http://127.0.0.1:4000/`
 
 ---
 
-## Common Issues / Troubleshooting
+## Troubleshooting
 
 ### “Cannot GET /”
 
-Make sure the Node server is running from `server/` and you’re visiting:
+Make sure you started the server from `server/` and you’re visiting:
 
-- `http://localhost:4000/`
+- http://localhost:4000/
 
-### “Failed to register” or “Failed to login”
+### Register/login failing
 
-This usually means the API is unreachable. In this project, the API is hosted by the same Node server:
+In this project, the API is hosted by the same Node server:
 
-- `http://localhost:4000/api/...`
+- http://localhost:4000/api/...
 
-Also ensure your browser isn’t accidentally calling a different port.
+If the API calls are failing, confirm your browser is hitting the same origin/port.
 
 ### “Could not get the current user”
 
-This message comes from a frontend helper that tries to display the signed-in username. If you are logged out, log in again; if you’re logged in and still see it, clear `localStorage` and retry.
-
----
-
-## Notes (Portfolio Context)
-
-- This is a learning-focused project: clarity and approachability are prioritized over advanced patterns.
-- The JSON file database is intentional for easy setup; in a production app you’d likely use a real database and stronger session/token handling.
+Clear `localStorage`, then log in again.
 
 ---
 
 ## Author
 
-- Frank Jamison — https://fcjamison.com
+Frank Jamison — https://fcjamison.com
